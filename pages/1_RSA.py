@@ -53,12 +53,12 @@ phi_n = (p - 1) * (q - 1)
 e = e_value(phi_n)
 d = d_value(phi_n, e)
 
-st.write("Public Key: (", e, ",", n, ")")
-st.write("Private Key: (", d, ",", n, ")")
+print("Public Key: (", e, ",", n, ")")
+print("Private Key: (", d, ",", n, ")")
 
-st.write("----------------------------------------------")
+print("----------------------------------------------")
 encrypted_message = encrypt_message(message, e, n)
-st.write("Encrypted Text:", encrypted_message)
+print("Encrypted Text:", encrypted_message)
 
 private_key_input = input("Enter the private key to decrypt the message (format: #,#): ")
 private_key_parts = private_key_input.split(",")
