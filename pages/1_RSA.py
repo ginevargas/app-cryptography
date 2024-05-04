@@ -87,3 +87,6 @@ if is_prime(p) and is_prime(q):
                 st.write("Plain text:", decrypted_message)
             else:
                 st.error("Invalid private key!") 
+
+# Refresh button
+st.button("Refresh")
