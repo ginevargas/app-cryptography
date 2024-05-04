@@ -57,14 +57,19 @@ if st.button("Encrypt Message"):
     encrypted_message = encrypt_message(message, e, n)
     st.write("Encrypted Text:", encrypted_message)
 
-private_key_input = st.text_input("Enter the private key to decrypt the message (format: #,#)")
-private_key_parts = private_key_input.split(",")
-if len(private_key_parts) == 2:
-    private_key_d = int(private_key_parts[0])
-    private_key_n = int(private_key_parts[1])
-    
-    if private_key_d == d and private_key_n == n:
-        decrypted_message = decrypt_message(encrypted_message, d, n)
-        st.write("Decrypted Message:", decrypted_message)
+button_pressed = st.button("Decrypt Message with Private Key")
+
+if button_pressed:
+    private_key_input = st.text_input("Enter the private key to decrypt the message (format: #,#)")
+    private_key_parts = private_key_input.split(",")
+    if len(private_key_parts) == 2:
+        private_key_d = int(private_key_parts[0])
+        private_key_n = int(private_key_parts[1])
+
+        if private_key_d == d and private_key_n == n:
+            decrypted_message = decrypt_message(encrypted_message, d, n)
+            st.write("Decrypted Message:", decrypted_message)
+        else:
+            st.write("Invalid private key!")
     else:
-        st.write("Invalid private key!")
+        st.write("Invalid private key format!")
