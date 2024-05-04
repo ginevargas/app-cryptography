@@ -28,10 +28,11 @@ session_state = st.session_state.session_state
 p = st.number_input("Enter Value of p (Large Prime Number):", min_value=2, step=1, key="p_input", value=session_state.get("p_input", None))
 q = st.number_input("Enter Value of q (Large Prime Number):", min_value=2, step=1, key="q_input", value=session_state.get("q_input", None))
 
-if not is_prime(p):
-    st.error(f"p: {p} is not a prime number!")
-if not is_prime(q):
-    st.error(f"q: {q} is not a prime number!")
+if p is not None and q is not None:  # Check if both p and q are provided
+    if not is_prime(p):
+        st.error(f"p: {p} is not a prime number!")
+    if not is_prime(q):
+        st.error(f"q: {q} is not a prime number!")
 
 if is_prime(p) and is_prime(q):
     message = st.text_input("Enter Message:", value=session_state.get("message_input", "Hello world!"), key="message_input")
@@ -40,7 +41,6 @@ if is_prime(p) and is_prime(q):
     phi_n = (p - 1) * (q - 1)
 
     # RSA Algorithm functions
-
     def gcd(a, b):
         gcd_val = 0
         for i in range(1, min(a, b) + 1):
