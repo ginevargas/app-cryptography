@@ -55,7 +55,7 @@ if not is_prime(q):
     st.error(f"q: {q} is not a prime number!")
 
 if is_prime(p) and is_prime(q):
-    message = st.text_input("Enter Message:")
+    message = st.text_input("Enter Message:", value="Hello world!", key="message_input")
 
     n = p * q
     phi_n = (p - 1) * (q - 1)
