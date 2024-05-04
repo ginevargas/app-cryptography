@@ -47,7 +47,7 @@ phi_n = (p - 1) * (q - 1)
 e = e_value(phi_n)
 d = d_value(phi_n, e)
 
-public_key = "Public Key: (" + str(e) + "," + str(n) + ")"
+public_key = "Public Key: ("'e' + str(e) + "," + str(n) + ")"
 private_key = "Private Key: (" + str(d) + "," + str(n) + ")"
 
 st.write(public_key)
@@ -68,6 +68,6 @@ if len(private_key_parts) == 2:
         if private_key_d == d and private_key_n == n:
             encrypted_message = encrypt_message(message, e, n)
             decrypted_message = decrypt_message(encrypted_message, d, n)
-            st.write("Decrypted Message:", decrypted_message)
+            st.write("Plain text:", decrypted_message)
         else:
             st.error("Invalid private key!") 
