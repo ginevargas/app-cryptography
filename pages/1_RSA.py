@@ -61,7 +61,7 @@ private_key_input = st.text_input("Enter the private key to decrypt the message 
 private_key_parts = private_key_input.split(",")
 
 if len(private_key_parts) == 2:
-    if st.button("Decrypt Message with Private Key"):
+    if st.button("Decrypt Message"):
         private_key_d = int(private_key_parts[0])
         private_key_n = int(private_key_parts[1])
 
