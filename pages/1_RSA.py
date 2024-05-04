@@ -66,7 +66,8 @@ if len(private_key_parts) == 2:
         private_key_n = int(private_key_parts[1])
 
         if private_key_d == d and private_key_n == n:
+            encrypted_message = encrypt_message(message, e, n)
             decrypted_message = decrypt_message(encrypted_message, d, n)
             st.write("Decrypted Message:", decrypted_message)
         else:
-            st.error("Invalid private key! Please enter a valid private key.") 
+            st.error("Invalid private key!") 
