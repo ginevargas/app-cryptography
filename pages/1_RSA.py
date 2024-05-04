@@ -21,7 +21,9 @@ def clear_input():
 
 # Create a session state object
 if 'session_state' not in st.session_state:
-    st.session_state.session_state = session_state
+    st.session_state.session_state = {}
+    
+session_state = st.session_state.session_state
 
 p = st.number_input("Enter Value of p (Large Prime Number):", min_value=2, step=1, key="p_input", value=session_state.p_input)
 q = st.number_input("Enter Value of q (Large Prime Number):", min_value=2, step=1, key="p_input", value=session_state.p_input)
