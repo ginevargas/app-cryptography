@@ -1,5 +1,14 @@
 import streamlit as st
 
+# Function to check if a number is prime
+def is_prime(num):
+    if num <= 1:
+        return False
+    for i in range(2, int(num**0.5) + 1):
+        if num % i == 0:
+            return False
+    return True
+
 # RSA Algorithm functions
  
 def gcd(a, b):
@@ -39,35 +48,42 @@ st.title("RSA Encryption and Decryption")
 
 p = st.number_input("Enter Value of p (Large Prime Number):", min_value=2, step=1)
 q = st.number_input("Enter Value of q (Large Prime Number):", min_value=2, step=1)
-message = st.text_input("Enter Message:")
 
-n = p * q
-phi_n = (p - 1) * (q - 1)
+if not is_prime(p):
+    st.error(f"p: {p} is not a prime number!")
+if not is_prime(q):
+    st.error(f"q: {q} is not a prime number!")
 
-e = e_value(phi_n)
-d = d_value(phi_n, e)
+if is_prime(p) and is_prime(q):
+    message = st.text_input("Enter Message:")
 
-public_key = "Public Key: ("'e = ' + str(e) + ","'n = ' + str(n) + ")"
-private_key = "Private Key: ("'d = ' + str(d) + ","'n = ' + str(n) + ")"
+    n = p * q
+    phi_n = (p - 1) * (q - 1)
 
-st.write(public_key)
-st.write(private_key)
+    e = e_value(phi_n)
+    d = d_value(phi_n, e)
 
-if st.button("Encrypt Message"):
-    encrypted_message = encrypt_message(message, e, n)
-    st.write("Encrypted Text:", encrypted_message)
+    public_key = "Public Key: ("'e = ' + str(e) + ","'n = ' + str(n) + ")"
+    private_key = "Private Key: ("'d = ' + str(d) + ","'n = ' + str(n) + ")"
 
-private_key_input = st.text_input("Enter the private key to decrypt the message (format: d,n)")
-private_key_parts = private_key_input.split(",")
+    st.write(public_key)
+    st.write(private_key)
 
-if len(private_key_parts) == 2:
-    if st.button("Decrypt Message"):
-        private_key_d = int(private_key_parts[0])
-        private_key_n = int(private_key_parts[1])
+    if st.button("Encrypt Message"):
+        encrypted_message = encrypt_message(message, e, n)
+        st.write("Encrypted Text:", encrypted_message)
 
-        if private_key_d == d and private_key_n == n:
-            encrypted_message = encrypt_message(message, e, n)
-            decrypted_message = decrypt_message(encrypted_message, d, n)
-            st.write("Plain text:", decrypted_message)
-        else:
-            st.error("Invalid private key!") 
+    private_key_input = st.text_input("Enter the private key to decrypt the message (format: d,n)")
+    private_key_parts = private_key_input.split(",")
+
+    if len(private_key_parts) == 2:
+        if st.button("Decrypt Message"):
+            private_key_d = int(private_key_parts[0])
+            private_key_n = int(private_key_parts[1])
+
+            if private_key_d == d and private_key_n == n:
+                encrypted_message = encrypt_message(message, e, n)
+                decrypted_message = decrypt_message(encrypted_message, d, n)
+                st.write("Plain text:", decrypted_message)
+            else:
+                st.error("Invalid private key!") 
