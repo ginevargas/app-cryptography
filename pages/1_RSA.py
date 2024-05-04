@@ -1,7 +1,7 @@
 import streamlit as st
 
 # RSA Algorithm functions
-
+ 
 def gcd(a, b):
     gcd_val = 0
     for i in range(1, min(a, b) + 1):
