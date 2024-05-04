@@ -25,8 +25,8 @@ if 'session_state' not in st.session_state:
 
 session_state = st.session_state.session_state
 
-p = st.number_input("Enter Value of p (Large Prime Number):", min_value=2, step=1, key="p_input", value=session_state.p_input)
-q = st.number_input("Enter Value of q (Large Prime Number):", min_value=2, step=1, key="p_input", value=session_state.q_input)
+p = st.number_input("Enter Value of p (Large Prime Number):", min_value=2, step=1, key="p_input", value=session_state.get("p_input", None))
+q = st.number_input("Enter Value of q (Large Prime Number):", min_value=2, step=1, key="q_input", value=session_state.get("q_input", None))
 
 if not is_prime(p):
     st.error(f"p: {p} is not a prime number!")
@@ -34,7 +34,7 @@ if not is_prime(q):
     st.error(f"q: {q} is not a prime number!")
 
 if is_prime(p) and is_prime(q):
-    message = st.text_input("Enter Message:", value=session_state.message_input, key="message_input")
+    message = st.text_input("Enter Message:", value=session_state.get("message_input", "Hello world!"), key="message_input")
 
     n = p * q
     phi_n = (p - 1) * (q - 1)
@@ -86,7 +86,7 @@ if is_prime(p) and is_prime(q):
         encrypted_message = encrypt_message(message, e, n)
         st.write("Encrypted Text:", encrypted_message)
 
-    private_key_input = st.text_input("Enter the private key to decrypt the message (format: d,n)", value=session_state.private_key_input, key="private_key_input")
+    private_key_input = st.text_input("Enter the private key to decrypt the message (format: d,n)", value=session_state.get("private_key_input", None), key="private_key_input")
     private_key_parts = private_key_input.split(",")
 
     if len(private_key_parts) == 2:
