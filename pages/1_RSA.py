@@ -48,7 +48,7 @@ e = e_value(phi_n)
 d = d_value(phi_n, e)
 
 public_key = "Public Key: ("'e = ' + str(e) + ","'n = ' + str(n) + ")"
-private_key = "Private Key: (" + str(d) + "," + str(n) + ")"
+private_key = "Private Key: ("'d = ' + str(d) + ","'n = ' + str(n) + ")"
 
 st.write(public_key)
 st.write(private_key)
@@ -57,7 +57,7 @@ if st.button("Encrypt Message"):
     encrypted_message = encrypt_message(message, e, n)
     st.write("Encrypted Text:", encrypted_message)
 
-private_key_input = st.text_input("Enter the private key to decrypt the message (format: #,#)")
+private_key_input = st.text_input("Enter the private key to decrypt the message (format: d,n)")
 private_key_parts = private_key_input.split(",")
 
 if len(private_key_parts) == 2:
