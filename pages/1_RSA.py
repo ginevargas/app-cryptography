@@ -47,7 +47,7 @@ phi_n = (p - 1) * (q - 1)
 e = e_value(phi_n)
 d = d_value(phi_n, e)
 
-public_key = "Public Key: ("'e' + str(e) + "," + str(n) + ")"
+public_key = "Public Key: ("'e = ' + str(e) + ","'n = ' + str(n) + ")"
 private_key = "Private Key: (" + str(d) + "," + str(n) + ")"
 
 st.write(public_key)
