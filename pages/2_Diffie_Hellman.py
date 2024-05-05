@@ -51,12 +51,12 @@ def main():
     p = st.number_input("Enter a prime number:", step=1)
     g = st.number_input("Enter a generator (a number less than {}):".format(p), step=1)
 
-    private_key = st.number_input("Enter your private key:", step=1)
+    private_key = int(st.number_input("Enter your private key:", step=1))
 
     public_key = generate_public_key(g, p, private_key)
     st.write("Your public key:", public_key)
 
-    other_public_key = st.number_input("Enter the received public key:", step=1)
+    other_public_key = int(st.number_input("Enter the received public key:", step=1))
 
     shared_key = generate_shared_key(other_public_key, private_key, p)
 
