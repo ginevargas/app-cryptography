@@ -58,7 +58,7 @@ def main():
 
     private_key = st.number_input("Enter your private key:", step=1)
     if private_key == 0:  # Check if private key is provided
-        st.error("Please input your private key to generate the public key")
+        st.warning("Please input your private key to generate the public key")
 
     public_key = generate_public_key(g, p, private_key)
     st.write("Your public key:", public_key)
