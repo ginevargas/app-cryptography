@@ -44,41 +44,31 @@ def decrypt_message(encrypted_message, key):
         decrypted_message += chr(ord(char) - key)
     return decrypted_message
 
+# Streamlit UI
 def main():
     st.title("Diffie-Hellman Key Exchange")
 
-    # Step 1: Ask the user to enter a prime number
-    p = st.number_input("Enter a prime number:", min_value=2, step=1)
+    p = st.number_input("Enter a prime number:", value=23, step=1)
+    g = st.number_input("Enter a generator (a number less than {}):".format(p), value=5, step=1)
 
-    # Step 2: Ask the user to enter a generator
-    g = st.number_input("Enter a generator (a number less than {}):".format(p), min_value=2, max_value=p-1, step=1)
-
-    # Step 3: Ask the user to enter their private key
     private_key = st.number_input("Enter your private key:", step=1)
 
-    # Step 4: Generate public key from user input
     public_key = generate_public_key(g, p, private_key)
-    st.write("Public key generated:", public_key)
+    st.write("Your public key:", public_key)
 
-    # Step 5: Receive the other party's public key
     other_public_key = st.number_input("Enter the received public key:", step=1)
 
-    # Step 6: Generate shared key
     shared_key = generate_shared_key(other_public_key, private_key, p)
 
-    # Step 7: Enter message
     message_to_encrypt = st.text_input("Enter your message:")
+    encrypted_message = encrypt_message(message_to_encrypt, shared_key)
 
-    # Step 8: Convert message to ciphertext
-    if st.button("Encrypt"):
-        ciphertext = encrypt_message(message_to_encrypt, shared_key)
-        st.write("Ciphertext:", ciphertext)
+    st.write("Ciphertext:", encrypted_message)
 
-    # Step 9: Receive the encrypted message and decrypt
     received_encrypted_message = st.text_input("Enter the received ciphertext message:")
-    if st.button("Decrypt"):
-        decrypted_message = decrypt_message(received_encrypted_message, shared_key)
-        st.write("Decrypted message:", decrypted_message)
+    decrypted_message = decrypt_message(received_encrypted_message, shared_key)
+
+    st.write("Decrypted message:", decrypted_message)
 
 if __name__ == "__main__":
     main()
