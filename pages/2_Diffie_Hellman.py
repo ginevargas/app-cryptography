@@ -61,14 +61,14 @@ def main():
     shared_key = generate_shared_key(other_public_key, private_key, p)
 
     message_to_encrypt = st.text_input("Enter your message:", value="Hello bobby!", key="message_input")
-    encrypted_message = encrypt_message(message_to_encrypt, shared_key)
-
-    st.write("Ciphertext:", encrypted_message)
+    if st.button("Encrypt"):
+        encrypted_message = encrypt_message(message_to_encrypt, shared_key)
+        st.write("Ciphertext:", encrypted_message)
 
     received_encrypted_message = st.text_input("Enter the received ciphertext message:")
-    decrypted_message = decrypt_message(received_encrypted_message, shared_key)
-
-    st.write("Decrypted message:", decrypted_message)
+    if st.button("Decrypt"):
+        decrypted_message = decrypt_message(received_encrypted_message, shared_key)
+        st.write("Decrypted message:", decrypted_message)
 
 if __name__ == "__main__":
     main()
