@@ -48,10 +48,10 @@ def decrypt_message(encrypted_message, key):
 def main():
     st.title("Diffie-Hellman Key Exchange")
 
-    p = st.number_input("Enter a prime number:")
-    g = st.number_input("Enter a generator (a number less than {}):".format(p))
+    p = st.number_input("Enter a prime number:", step=1)
+    g = st.number_input("Enter a generator (a number less than {}):".format(p), step=1)
 
-    private_key = st.number_input("Enter your private key:")
+    private_key = st.number_input("Enter your private key:", step=1)
 
     public_key = generate_public_key(g, p, private_key)
     st.write("Your public key:", public_key)
@@ -61,14 +61,14 @@ def main():
     shared_key = generate_shared_key(other_public_key, private_key, p)
 
     message_to_encrypt = st.text_input("Enter your message:")
-    encrypted_message = encrypt_message(message_to_encrypt, shared_key)
-
-    st.write("Ciphertext:", encrypted_message)
+    if st.button("Encrypt"):
+        ciphertext = encrypt_message(message_to_encrypt, shared_key)
+        st.write("Ciphertext:", ciphertext)
 
     received_encrypted_message = st.text_input("Enter the received ciphertext message:")
-    decrypted_message = decrypt_message(received_encrypted_message, shared_key)
-
-    st.write("Decrypted message:", decrypted_message)
+    if st.button("Decrypt"):
+        decrypted_message = decrypt_message(received_encrypted_message, shared_key)
+        st.write("Decrypted message:", decrypted_message)
 
 if __name__ == "__main__":
     main()
