@@ -49,7 +49,12 @@ def main():
     st.title("Diffie-Hellman Key Exchange")
 
     p = st.number_input("Enter a prime number:", step=1)
-    g = st.number_input("Enter a generator (a number less than {}):".format(p), value=5, step=1)
+    if not is_prime(p):
+        st.error("The entered number is not a prime number.")
+
+    g = st.number_input("Enter a generator (a number less than {}):".format(p), step=1)
+    if g >= p or not is_primitive_root(g, p):
+        st.error("The entered number is not a primitive root of {}.".format(p))
 
     private_key = st.number_input("Enter your private key:", step=1)
 
@@ -62,7 +67,6 @@ def main():
 
     message_to_encrypt = st.text_input("Enter your message:")
 
-    
     ciphertext = encrypt_message(message_to_encrypt, shared_key)
     st.write("Ciphertext:", ciphertext)
 
