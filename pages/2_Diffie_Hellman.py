@@ -48,7 +48,7 @@ def decrypt_message(encrypted_message, key):
 def main():
     st.title("Diffie-Hellman Key Exchange")
 
-    p = st.number_input("Enter a prime number:", value=23, step=1)
+    p = st.number_input("Enter a prime number:", step=1)
     g = st.number_input("Enter a generator (a number less than {}):".format(p), value=5, step=1)
 
     private_key = st.number_input("Enter your private key:", step=1)
@@ -61,9 +61,10 @@ def main():
     shared_key = generate_shared_key(other_public_key, private_key, p)
 
     message_to_encrypt = st.text_input("Enter your message:")
-    encrypted_message = encrypt_message(message_to_encrypt, shared_key)
 
-    st.write("Ciphertext:", encrypted_message)
+    
+    ciphertext = encrypt_message(message_to_encrypt, shared_key)
+    st.write("Ciphertext:", ciphertext)
 
     received_encrypted_message = st.text_input("Enter the received ciphertext message:")
     decrypted_message = decrypt_message(received_encrypted_message, shared_key)
