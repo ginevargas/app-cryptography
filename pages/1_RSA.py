@@ -74,8 +74,8 @@ if is_prime(p) and is_prime(q):
         st.write("Encrypted Text:", encrypted_message)
 
     # Encrypt the message
-    encrypted_message = encrypt_message(message, e, n)
-    st.write("Encrypted Text:", encrypted_message)
+   # encrypted_message = encrypt_message(message, e, n)
+    #st.write("Encrypted Text:", encrypted_message)
 
 
     private_key_input = st.text_input("Enter the private key to decrypt the message (format: d,n)")
